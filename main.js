@@ -46,6 +46,32 @@ document.querySelectorAll('a[href^="#"]').forEach((link) => {
   });
 });
 
+/* ─── Acordeón mobile ───────────────────────────── */
+function initAccordion() {
+  if (window.innerWidth >= 640) return;
+
+  document.querySelectorAll('.accordion-toggle').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const section = btn.closest('.accordion-section');
+      const isOpen = btn.getAttribute('aria-expanded') === 'true';
+
+      btn.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
+      section.classList.toggle('is-open', !isOpen);
+    });
+  });
+}
+
+initAccordion();
+window.addEventListener('resize', () => {
+  document.querySelectorAll('.accordion-section').forEach((s) => {
+    s.classList.remove('is-open');
+  });
+  document.querySelectorAll('.accordion-toggle').forEach((b) => {
+    b.setAttribute('aria-expanded', 'false');
+  });
+  initAccordion();
+}, { passive: true });
+
 /* ─── Stagger delay para cards en grid ──────────── */
 function applyStagger(selector, delayStep = 80) {
   const groups = document.querySelectorAll(selector);
