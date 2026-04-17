@@ -602,6 +602,49 @@ button { border: none; cursor: pointer; background: none; font: inherit; }
   box-shadow: 0 6px 28px rgba(37, 211, 102, 0.5);
 }
 
+/* ─── ACORDEÓN MOBILE (generado por JS) ── */
+@media (max-width: 639px) {
+  .acc-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    width: 100%;
+    padding: 22px 24px;
+    background: none;
+    border: none;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    cursor: pointer;
+    text-align: left;
+  }
+  .acc-title {
+    font-family: var(--serif);
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.3;
+  }
+  .acc-icon {
+    font-family: var(--serif);
+    font-size: 26px;
+    font-weight: 300;
+    color: var(--accent);
+    line-height: 1;
+    flex-shrink: 0;
+    transition: transform var(--transition);
+    display: inline-block;
+  }
+  .acc-content {
+    padding: 24px;
+  }
+  .section {
+    padding: 0;
+  }
+  .section .container {
+    padding: 0;
+  }
+}
+
 /* ═══════════════════════════════════════════
    TABLET — 640px+
 ═══════════════════════════════════════════ */
