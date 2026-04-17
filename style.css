@@ -208,6 +208,11 @@ button { border: none; cursor: pointer; background: none; font: inherit; }
 .nav__logo-img {
   height: 32px;
   width: auto;
+  filter: brightness(0) invert(1);
+  transition: filter var(--transition);
+}
+.nav.scrolled .nav__logo-img {
+  filter: brightness(0);
 }
 .nav__logo-text {
   font-family: var(--serif);
