@@ -47,30 +47,57 @@ document.querySelectorAll('a[href^="#"]').forEach((link) => {
 });
 
 /* ─── Acordeón mobile ───────────────────────────── */
+function getBodies(section) {
+  return section.querySelectorAll('.accordion-body');
+}
+
+function closeAll() {
+  document.querySelectorAll('.accordion-section').forEach((section) => {
+    getBodies(section).forEach((b) => { b.style.display = 'none'; });
+    const btn = section.querySelector('.accordion-toggle');
+    if (btn) btn.setAttribute('aria-expanded', 'false');
+  });
+}
+
+function openSection(section) {
+  getBodies(section).forEach((b) => { b.style.display = 'block'; });
+  const btn = section.querySelector('.accordion-toggle');
+  if (btn) btn.setAttribute('aria-expanded', 'true');
+}
+
+function resetAccordion() {
+  document.querySelectorAll('.accordion-section').forEach((section) => {
+    getBodies(section).forEach((b) => { b.style.display = ''; });
+    const btn = section.querySelector('.accordion-toggle');
+    if (btn) btn.setAttribute('aria-expanded', 'false');
+  });
+}
+
 function initAccordion() {
-  if (window.innerWidth >= 640) return;
+  if (window.innerWidth >= 640) {
+    resetAccordion();
+    return;
+  }
+
+  closeAll();
 
   document.querySelectorAll('.accordion-toggle').forEach((btn) => {
     btn.addEventListener('click', () => {
       const section = btn.closest('.accordion-section');
       const isOpen = btn.getAttribute('aria-expanded') === 'true';
-
-      btn.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
-      section.classList.toggle('is-open', !isOpen);
+      if (isOpen) {
+        getBodies(section).forEach((b) => { b.style.display = 'none'; });
+        btn.setAttribute('aria-expanded', 'false');
+      } else {
+        getBodies(section).forEach((b) => { b.style.display = 'block'; });
+        btn.setAttribute('aria-expanded', 'true');
+      }
     });
   });
 }
 
 initAccordion();
-window.addEventListener('resize', () => {
-  document.querySelectorAll('.accordion-section').forEach((s) => {
-    s.classList.remove('is-open');
-  });
-  document.querySelectorAll('.accordion-toggle').forEach((b) => {
-    b.setAttribute('aria-expanded', 'false');
-  });
-  initAccordion();
-}, { passive: true });
+window.addEventListener('resize', initAccordion, { passive: true });
 
 /* ─── Stagger delay para cards en grid ──────────── */
 function applyStagger(selector, delayStep = 80) {
