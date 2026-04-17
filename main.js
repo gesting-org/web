@@ -82,6 +82,13 @@ function buildAccordion() {
     container.appendChild(header);
     container.appendChild(wrapper);
 
+    // Auto-open first section
+    if (section === document.getElementById(accordionSections[0].id)) {
+      header.setAttribute('aria-expanded', 'true');
+      wrapper.style.display = 'block';
+      header.querySelector('.acc-icon').textContent = '×';
+    }
+
     header.addEventListener('click', () => {
       const open = header.getAttribute('aria-expanded') === 'true';
       header.setAttribute('aria-expanded', open ? 'false' : 'true');
