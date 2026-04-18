@@ -643,6 +643,12 @@ button { border: none; cursor: pointer; background: none; font: inherit; }
   .section .container {
     padding: 0;
   }
+  #contacto {
+    padding: 64px 0;
+  }
+  #contacto .container {
+    padding: 0 24px;
+  }
 }
 
 /* ═══════════════════════════════════════════
